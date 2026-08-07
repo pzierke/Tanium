@@ -1,0 +1,949 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspaceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the existing Log Analytics / Sentinel workspace"
+      }
+    },
+    "workspaceLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "Region of the workspace, e.g. eastus"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumComplyCompliance_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumComplyCompliance_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "IP_Address_s",
+              "type": "string"
+            },
+            {
+              "name": "Operating_System_Generation_s",
+              "type": "string"
+            },
+            {
+              "name": "Rule_s",
+              "type": "string"
+            },
+            {
+              "name": "Rule_ID_s",
+              "type": "string"
+            },
+            {
+              "name": "Standard_s",
+              "type": "string"
+            },
+            {
+              "name": "Profile_s",
+              "type": "string"
+            },
+            {
+              "name": "Version_s",
+              "type": "string"
+            },
+            {
+              "name": "Status_Category_s",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumComplyVulnerabilities_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumComplyVulnerabilities_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Computer_ID_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "IP_Address_s",
+              "type": "string"
+            },
+            {
+              "name": "Operating_System_Generation_s",
+              "type": "string"
+            },
+            {
+              "name": "CVE_s",
+              "type": "string"
+            },
+            {
+              "name": "Scan_Type_s",
+              "type": "string"
+            },
+            {
+              "name": "CVE_Year_s",
+              "type": "string"
+            },
+            {
+              "name": "Title_s",
+              "type": "string"
+            },
+            {
+              "name": "Severity_s",
+              "type": "string"
+            },
+            {
+              "name": "CVSS_Score_d",
+              "type": "real"
+            },
+            {
+              "name": "CVSS_v3_Severity_s",
+              "type": "string"
+            },
+            {
+              "name": "CVSS_v3_Score_d",
+              "type": "real"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumDefenderHealth_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumDefenderHealth_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_ID_s",
+              "type": "string"
+            },
+            {
+              "name": "OS_Platform_s",
+              "type": "string"
+            },
+            {
+              "name": "IP_Address_s",
+              "type": "string"
+            },
+            {
+              "name": "Is_Defender_Installed_s",
+              "type": "string"
+            },
+            {
+              "name": "Is_Defender_Healthy_s",
+              "type": "string"
+            },
+            {
+              "name": "Health_Issues_s",
+              "type": "string"
+            },
+            {
+              "name": "AntiMalware_Engine_Version_s",
+              "type": "string"
+            },
+            {
+              "name": "AntiMalware_Product_Version_s",
+              "type": "string"
+            },
+            {
+              "name": "Is_AntiMalware_Service_Enabled_s",
+              "type": "string"
+            },
+            {
+              "name": "AntiMalware_Service_State_s",
+              "type": "string"
+            },
+            {
+              "name": "AntiSpyware_Signature_Version_s",
+              "type": "string"
+            },
+            {
+              "name": "Is_AntiSpyware_Service_Enabled_s",
+              "type": "string"
+            },
+            {
+              "name": "AntiSpyware_Signature_Days_Age_s",
+              "type": "string"
+            },
+            {
+              "name": "AntiSpyware_Signature_Update_Date_s",
+              "type": "string"
+            },
+            {
+              "name": "QuickScan_Signature_Version_s",
+              "type": "string"
+            },
+            {
+              "name": "QuickScan_Age_s",
+              "type": "string"
+            },
+            {
+              "name": "QuickScan_Overdue_s",
+              "type": "string"
+            },
+            {
+              "name": "QuickScan_Start_Time_s",
+              "type": "string"
+            },
+            {
+              "name": "QuickScan_Stop_Time_s",
+              "type": "string"
+            },
+            {
+              "name": "Count_d",
+              "type": "real"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumDiscoverUnmanagedAssets_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumDiscoverUnmanagedAssets_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "id_d",
+              "type": "real"
+            },
+            {
+              "name": "MacAddress_s",
+              "type": "string"
+            },
+            {
+              "name": "MacOrganization_s",
+              "type": "string"
+            },
+            {
+              "name": "IPAddress",
+              "type": "string"
+            },
+            {
+              "name": "NatIpAddress_s",
+              "type": "string"
+            },
+            {
+              "name": "HostName_s",
+              "type": "string"
+            },
+            {
+              "name": "Labels_s",
+              "type": "string"
+            },
+            {
+              "name": "Locations_s",
+              "type": "string"
+            },
+            {
+              "name": "TaniumComputerId_d",
+              "type": "real"
+            },
+            {
+              "name": "Os_s",
+              "type": "string"
+            },
+            {
+              "name": "OsGeneration_s",
+              "type": "string"
+            },
+            {
+              "name": "Managed_b",
+              "type": "boolean"
+            },
+            {
+              "name": "Unmanageable_d",
+              "type": "real"
+            },
+            {
+              "name": "Arp_b",
+              "type": "boolean"
+            },
+            {
+              "name": "Nmap_b",
+              "type": "boolean"
+            },
+            {
+              "name": "Ping_b",
+              "type": "boolean"
+            },
+            {
+              "name": "Connected_b",
+              "type": "boolean"
+            },
+            {
+              "name": "AwsApi_b",
+              "type": "boolean"
+            },
+            {
+              "name": "CentralizedNmap_b",
+              "type": "boolean"
+            },
+            {
+              "name": "SatelliteNmap_b",
+              "type": "boolean"
+            },
+            {
+              "name": "CreatedAt_t",
+              "type": "datetime"
+            },
+            {
+              "name": "UpdatedAt_t",
+              "type": "datetime"
+            },
+            {
+              "name": "FirstManagedAt_t",
+              "type": "datetime"
+            },
+            {
+              "name": "LastManagedAt_t",
+              "type": "datetime"
+            },
+            {
+              "name": "LastDiscoveredAt_t",
+              "type": "datetime"
+            },
+            {
+              "name": "Profile_s",
+              "type": "string"
+            },
+            {
+              "name": "SatelliteDecId_g",
+              "type": "guid"
+            },
+            {
+              "name": "SatelliteName_s",
+              "type": "string"
+            },
+            {
+              "name": "Ports_s",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumHighUptime_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumHighUptime_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "High_Uptime_s",
+              "type": "string"
+            },
+            {
+              "name": "Last_Reboot_s",
+              "type": "string"
+            },
+            {
+              "name": "Reboot_Required_s",
+              "type": "string"
+            },
+            {
+              "name": "Last_Logged_In_User_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_ID_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Count_d",
+              "type": "real"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumPatchCoverageStatus_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumPatchCoverageStatus_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Status_s",
+              "type": "string"
+            },
+            {
+              "name": "Detail_s",
+              "type": "string"
+            },
+            {
+              "name": "Count_d",
+              "type": "real"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "IP_Address_s",
+              "type": "string"
+            },
+            {
+              "name": "Patch_Is_Process_Running_s",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumPatchListApplicability_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumPatchListApplicability_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Operating_System_s",
+              "type": "string"
+            },
+            {
+              "name": "Count_d",
+              "type": "real"
+            },
+            {
+              "name": "Computer_ID_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Last_Logged_In_User_s",
+              "type": "string"
+            },
+            {
+              "name": "Patch_List_Ids_s",
+              "type": "string"
+            },
+            {
+              "name": "Title_s",
+              "type": "string"
+            },
+            {
+              "name": "Install_Status_s",
+              "type": "string"
+            },
+            {
+              "name": "Uninstallable_s",
+              "type": "string"
+            },
+            {
+              "name": "Severity_s",
+              "type": "string"
+            },
+            {
+              "name": "Release_Date_s",
+              "type": "string"
+            },
+            {
+              "name": "Bulletins_s",
+              "type": "string"
+            },
+            {
+              "name": "Size_in_Bytes_s",
+              "type": "string"
+            },
+            {
+              "name": "KB_Articles_s",
+              "type": "string"
+            },
+            {
+              "name": "CVE_IDs_s",
+              "type": "string"
+            },
+            {
+              "name": "Superseded_s",
+              "type": "string"
+            },
+            {
+              "name": "Custom_Field_s",
+              "type": "string"
+            },
+            {
+              "name": "OS_Type_s",
+              "type": "string"
+            },
+            {
+              "name": "Product_s",
+              "type": "string"
+            },
+            {
+              "name": "Classification_s",
+              "type": "string"
+            },
+            {
+              "name": "Patch_Mean_Time_to_Patch_s",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumPatchListCompliance_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumPatchListCompliance_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Operating_System_s",
+              "type": "string"
+            },
+            {
+              "name": "Count_d",
+              "type": "real"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_ID_s",
+              "type": "string"
+            },
+            {
+              "name": "Last_Logged_In_User_s",
+              "type": "string"
+            },
+            {
+              "name": "Patch_List_Id_s",
+              "type": "string"
+            },
+            {
+              "name": "Patch_List_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Compliance_Status_s",
+              "type": "string"
+            },
+            {
+              "name": "OS_Type_s",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumSCCMClientHealth_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumSCCMClientHealth_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "IP_Address_s",
+              "type": "string"
+            },
+            {
+              "name": "OS_Platform_s",
+              "type": "string"
+            },
+            {
+              "name": "Health_Status_s",
+              "type": "string"
+            },
+            {
+              "name": "Reason_s",
+              "type": "string"
+            },
+            {
+              "name": "Count_d",
+              "type": "real"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/tables",
+      "apiVersion": "2022-10-01",
+      "name": "[concat(parameters('workspaceName'), '/TaniumThreatResponse_CL')]",
+      "properties": {
+        "plan": "Analytics",
+        "schema": {
+          "name": "TaniumThreatResponse_CL",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "datetime",
+              "description": "The time at which the data was generated"
+            },
+            {
+              "name": "Timestamp_t",
+              "type": "datetime"
+            },
+            {
+              "name": "MITRE_Techniques_s",
+              "type": "string"
+            },
+            {
+              "name": "Impact_Score_s",
+              "type": "string"
+            },
+            {
+              "name": "Alert_Id_g",
+              "type": "guid"
+            },
+            {
+              "name": "Computer_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Computer_IP_s",
+              "type": "string"
+            },
+            {
+              "name": "Intel_Id_d",
+              "type": "real"
+            },
+            {
+              "name": "Intel_Type_s",
+              "type": "string"
+            },
+            {
+              "name": "Intel_Name_s",
+              "type": "string"
+            },
+            {
+              "name": "Intel_Labels_s",
+              "type": "string"
+            },
+            {
+              "name": "EID",
+              "type": "string"
+            },
+            {
+              "name": "Link",
+              "type": "string"
+            },
+            {
+              "name": "IntelSource",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_json",
+              "type": "string",
+              "description": "The raw json from the match details."
+            },
+            {
+              "name": "Match_Details_intel_id_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_config_id_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_config_rev_id_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_match_contexts_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_hash_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_type_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_source_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_version_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_match_properties_file_size_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_recorder_table_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_recorder_table_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_pid_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_match_properties_args_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_file_md5_g",
+              "type": "guid"
+            },
+            {
+              "name": "Match_Details_match_properties_file_sha1_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_file_sha256_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_file_fullpath_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_name_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_ppid_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_match_properties_user_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_pid_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_args_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_file_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_name_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_ppid_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_user_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_parent_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_start_time_t",
+              "type": "datetime"
+            },
+            {
+              "name": "Match_Details_match_properties_parent_recorder_unique_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_match_properties_start_time_t",
+              "type": "datetime"
+            },
+            {
+              "name": "Match_Details_match_properties_recorder_unique_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_whats_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_domain_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_hunt_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_type_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_intel_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_last_seen_t",
+              "type": "datetime"
+            },
+            {
+              "name": "Match_Details_finding_threat_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_finding_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_first_seen_t",
+              "type": "datetime"
+            },
+            {
+              "name": "Match_Details_finding_description_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_source_name_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_system_info_os_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_system_info_bits_d",
+              "type": "real"
+            },
+            {
+              "name": "Match_Details_finding_system_info_platform_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_system_info_patch_level_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_system_info_build_number_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_system_info_logged_on_user_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_reporting_id_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_artifact_artifact_hash_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_artifact_instance_hash_s",
+              "type": "string"
+            },
+            {
+              "name": "Match_Details_finding_artifact_windows_defender_event",
+              "type": "string"
+            },
+            {
+              "name": "MatchDets_finding_artifact_WindowsDefenderEvent_timestamp_ms",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
