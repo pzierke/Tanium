@@ -78,8 +78,21 @@ $body = ConvertTo-Json @($record) -Depth 10 -Compress
 
 
 
+
+
+
+
+
 $recordJson = $record | ConvertTo-Json -Depth 10 -Compress
 $body = "[$recordJson]"
 
 
+$response = Invoke-WebRequest `
+    -Method POST `
+    -Uri $uri `
+    -Headers $headers `
+    -ContentType "application/json" `
+    -Body $body `
+    -UseBasicParsing
 
+$response.StatusCode
