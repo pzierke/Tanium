@@ -74,3 +74,12 @@ $record = @{
 }
 
 $body = ConvertTo-Json @($record) -Depth 10 -Compress
+
+
+
+
+$recordJson = $record | ConvertTo-Json -Depth 10 -Compress
+$body = "[$recordJson]"
+
+
+
