@@ -41,3 +41,36 @@ Invoke-WebRequest `
     -Headers $headers `
     -ContentType "application/json" `
     -Body $body
+
+
+
+##################### new
+
+$record = @{
+    object_id         = 12345
+    audit_name        = "Direct API Test"
+    creation_time     = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    modification_time = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    last_modified_by  = "PowerShell-Test"
+
+    mod_persona = @{
+        id   = 999
+        name = "TestPersona"
+    }
+
+    mod_user = @{
+        id   = 999
+        name = "TestUser"
+    }
+
+    modifier_user_id = 999
+    details          = "TEST LOG - Direct Azure Monitor Logs Ingestion API"
+    audit_row_id     = 888888
+    event_type_id    = 0
+    audit_type       = "test_audit"
+    type_name        = "TestObject"
+    object_name      = "Direct API Test"
+    object_type_name = "test"
+}
+
+$body = ConvertTo-Json @($record) -Depth 10 -Compress
