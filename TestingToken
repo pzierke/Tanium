@@ -1,0 +1,18 @@
+$tenantId     = "<TENANT-ID>"
+$clientId     = "<CLIENT-ID>"
+$clientSecret = "<CLIENT-SECRET>"
+
+$tokenBody = @{
+    client_id     = $clientId
+    client_secret = $clientSecret
+    scope         = "https://monitor.azure.us/.default"
+    grant_type    = "client_credentials"
+}
+
+$token = Invoke-RestMethod `
+    -Method POST `
+    -Uri "https://login.microsoftonline.us/$tenantId/oauth2/v2.0/token" `
+    -ContentType "application/x-www-form-urlencoded" `
+    -Body $tokenBody
+
+$token.access_token
