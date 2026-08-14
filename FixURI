@@ -1,1 +1,44 @@
 $uri = "${dceEndpoint}/dataCollectionRules/${dcrId}/streams/${stream}?api-version=2023-01-01"
+
+
+
+
+$dceEndpoint = "https://taniumsentineldce-s02b.usgovvirginia-1.ingest.monitor.azure.us"
+$dcrId       = "dcr-0a2326ad20834fb397f2a57e169d2a54"
+$stream      = "Custom-TaniumAudit_CL"
+
+$uri = "${dceEndpoint}/dataCollectionRules/${dcrId}/streams/${stream}?api-version=2023-01-01"
+
+$uri
+
+
+
+
+$body = @(
+    @{
+        object_id         = 12345
+        audit_name        = "ChatGPT Direct API Test"
+        creation_time     = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+        modification_time = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+        last_modified_by  = "PowerShell-Test"
+
+        mod_persona = @{
+            id   = 999
+            name = "TestPersona"
+        }
+
+        mod_user = @{
+            id   = 999
+            name = "TestUser"
+        }
+
+        modifier_user_id = 999
+        details          = "TEST LOG - Direct Azure Monitor Logs Ingestion API"
+        audit_row_id     = 888888
+        event_type_id    = 0
+        audit_type       = "test_audit"
+        type_name        = "TestObject"
+        object_name      = "Direct API Test"
+        object_type_name = "test"
+    }
+) | ConvertTo-Json -Depth 10
