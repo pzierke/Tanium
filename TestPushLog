@@ -1,0 +1,43 @@
+$dceEndpoint = "https://<YOUR-DCE-ENDPOINT>"
+$dcrId       = "dcr-0a2326ad20834fb397f2a57e169d2a54"
+$stream      = "Custom-TaniumAudit_CL"
+
+$uri = "$dceEndpoint/dataCollectionRules/$dcrId/streams/$stream?api-version=2023-01-01"
+
+$body = @(
+    @{
+        object_id         = 12
+        audit_name        = "Test Audit"
+        creation_time     = "2026-08-14T18:30:00Z"
+        modification_time = "2026-08-14T18:30:00Z"
+        last_modified_by  = "powershell-test"
+
+        mod_persona = @{
+            id = 1
+        }
+
+        mod_user = @{
+            id = 1
+        }
+
+        modifier_user_id = 1
+        details          = "Direct Logs Ingestion API test"
+        audit_row_id     = 999999
+        event_type_id    = 0
+        audit_type       = "authentication_audit"
+        type_name        = "CreateObject"
+        object_name      = "PowerShell Test"
+        object_type_name = "authentication"
+    }
+) | ConvertTo-Json -Depth 10
+
+$headers = @{
+    Authorization = "Bearer $($token.access_token)"
+}
+
+Invoke-WebRequest `
+    -Method POST `
+    -Uri $uri `
+    -Headers $headers `
+    -ContentType "application/json" `
+    -Body $body
