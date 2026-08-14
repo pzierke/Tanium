@@ -1,0 +1,1 @@
+$uri = "${dceEndpoint}/dataCollectionRules/${dcrId}/streams/${stream}?api-version=2023-01-01"
